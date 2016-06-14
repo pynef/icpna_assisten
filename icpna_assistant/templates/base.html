@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<title>
+		{% block title %}{% endblock title %}
+	</title>
+
+	{% load staticfiles %}
+
+	<!-- Theme's own CSS file -->
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/angular-material.min.css' %}">
+	<link id="app_main_css" rel="stylesheet" href="{% static 'css/theme_blue/css/main.css' %}">
+	{% block cssBegin %}  {% endblock cssBegin %}
+
+	<!-- Include Jquery in the vendor folder -->
+  	<script src="{% static 'js/jquery.min.js' %}"></script>
+	{% block jsBegin %}  {% endblock jsBegin %}
+	
+	<!--[if lte IE 9]>
+	<script src="dist/js/html5shiv.min.js"></script>
+	<![endif]-->
+
+	<link href="{% static 'css/fonts-googleapis.css' %}" rel="stylesheet" type="text/css">
+	{% block head %}{% endblock head %}
+
+</head>
+<body {% block bodyTag %} {% endblock bodyTag %} >
+ 
+	{% block content %}
+	{% endblock content %}
+
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+	<script src="{% static 'js/jquery.slimscroll.min.js' %}"></script> 
+	<!-- 
+	<script src="scripts/gmap.js"></script> 
+	-->
+	<script src="{% static 'js/angular.min.js' %}"></script>
+
+	<script src="{% static 'js/angular-animate.min.js' %}"></script>
+
+	<script src="{% static 'js/angular-route.min.js' %}"></script>
+
+	<script src="{% static 'js/angular-aria.min.js' %}"></script>
+
+	<script src="{% static 'js/angular-material.min.js' %}"></script>
+	{% block jsEnd %}  {% endblock jsEnd %}
+	
+</body>
+</html>

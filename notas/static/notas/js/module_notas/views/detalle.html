@@ -1,0 +1,58 @@
+<section class="panel" ng-init="Initializing(inst, sede, token)">						
+	<md-toolbar class="md-default-theme">
+		<div class="md-toolbar-tools">
+			<h3>
+				<span>NOTAS</span>
+			</h3>
+		</div>
+	</md-toolbar>
+	<div class="panel-body">
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th ng-repeat-start="componente in componentes"></th>
+					<th ng-repeat="item in componente.items_c">{{item.nombre}}</th>
+					<th class="bg-success" ng-repeat-end>{{componente.simbolo}}</th>					
+					<th>SCORE</th>
+					<th class="bg-success">TOTAL</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="alumno in alumnos">
+					<td>{{alumno.apellido_paterno + ' ' + alumno.apellido_materno + ', ' + alumno.nombres}}</td>
+					<td ng-repeat-start="componente in componentes"></td>
+					<td ng-repeat="item in componente.items_c">
+						<select name="" id="" ng-model="nota_item" 
+							ng-change="RegistraNota(inst, sede, alumno.matricula, item.id, nota_item, user_name, $parent.$parent.$index, $parent.$index, $index, token)
+						">
+							<option value="{{i}}" 
+								ng-repeat="i in rango_calif(item.rango_min, item.rango_max)" 
+								ng-selected="nota_item == i"
+							>
+								{{i}}
+							</option>
+						</select>
+					</td>					
+					<td class="bg-success" ng-repeat-end>{{nota_componente[$parent.$index][$index][0]}}</td>
+					<td>{{score[$index]}}</td>
+					<td class="bg-success">{{total[$index]}}</td>
+				</tr>
+			</tbody>
+		</table>	
+								
+	<!-- <div class="row">
+		<div class="pull-right">
+		   <md-button class="md-fab md-primary md-button md-default-theme" ng-transclude="">	   		
+				<div style="" class="md-ripple-container">Editar</div>
+		   </md-button>
+		   <md-button class="md-fab md-success md-button md-default-theme" ng-transclude="">   		
+				<div style="" class="md-ripple-container">Guardar</div>
+		   </md-button>
+		   <md-button class="md-fab md-danger md-button md-default-theme" ng-transclude="">   		
+				<div style="" class="md-ripple-container">Cancelar</div>
+		   </md-button>
+		</div>
+	</div> -->
+</section>

@@ -1,0 +1,40 @@
+/* Menu */
+.top-header .logo{
+	background: #FFF;
+}
+.logo-link img{
+	width: 80%;
+	height: auto;
+}
+.menu_tag_name{
+	color: #FFF;
+	font-size: .8em;
+	margin: 12px auto;
+	display: block;
+}
+/* Fin Menu */
+
+/* Colores de iconos*/
+.color-white{
+	color: #FFF;
+}
+/* Fin Colores de iconos*/
+
+
+/* Propiedades de elementos reescritas del theme */
+.nav-style--alternative #nav-container .navigation-profile-picture{
+	padding: 15px 10px 25px 10px;
+}
+/* Fin Propiedades de elementos reescritas del theme */ */
+
+.clearfix{
+	clear: both;
+}
+
+/*  Lista para Items */
+.list_items .item {
+    display: inline-block;
+}
+.list_items{
+    padding: 0px;
+}

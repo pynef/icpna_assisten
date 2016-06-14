@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Admin.io - AngularJS theme</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    {% load staticfiles %}
+    <!-- Theme's own CSS file -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/angular-material.min.css' %}">
+    <link id="app_main_css" rel="stylesheet" href="{% static 'css/main.css' %}">
+    <!-- Include Jquery in the vendor folder -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!--[if lte IE 9]>
+    <script src="{% static 'js/html5shiv.min.js' %}"></script>
+    <![endif]-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,700,600,400' rel='stylesheet' type='text/css'>
+</head>
+
+<body id="app" data-custom-background="" data-off-canvas-nav="">
+<div class="page-wrapper nav-style--alternative">
+  <div>
+    <aside id="nav-container">
+      <div id="nav-wrapper" class="md-whiteframe-z2">
+        <ul id="nav" data-slim-scroll data-collapse-nav data-highlight-active>
+            <li class="navigation-profile-picture">
+              <a href="#">
+                <img class="img80_80 img-circle" src="{% static 'img/user.png' %}" alt="">
+              </a>
+            </li>
+            <li>
+                <a md-ink-ripple="#bbb" href="#">
+                  <!-- <md-icon md-svg-src="{% static 'img/icons/ic_dashboard_24px.svg' %}"></md-icon> -->
+                  <span>Dashboard</span>
+                </a>
+                <ul>
+                    <li><a md-ink-ripple="#bbb" active href="#"><i class="fa fa-circle submenu__icon"></i><span> Dashboard</span></a></li>
+                    <li><a md-ink-ripple="#bbb" active href="#"><i class="fa fa-circle submenu__icon"></i><span> Dashboard 1</span></a></li>
+                    <li><a md-ink-ripple="#bbb" active href="#"><i class="fa fa-circle submenu__icon"></i><span> Dashboard 2</span></a></li>
+                </ul>
+            </li>            
+        </ul>
+
+      </div>
+    </aside>
+  </div>
+
+  <div class="view-container">  <!-- class="view-container" -->
+
+    <div>  <!-- data-ng-hide="checkIfOwnPage()" data-ng-cloak="" class="no-print" -->
+      <section id="header" class="top-header">  <!-- data-ng-include=" 'Views/header.html' " id="header" class="top-header" -->
+        <!-- Logo -->
+          <div class="logo">  <!-- data-ng-controller="AdminAppCtrl" -->
+              <a class="logo-link" href="#">
+                <!-- <md-icon md-svg-src="{% static 'img/icons/ic_whatshot_24px.svg' %}"></md-icon> -->
+                  <!--<span></span>-->
+              </a>
+              <div class="form-group logo-search">
+                  <div>
+                      <input type="text" class="form-control" placeholder="Search site">
+                      <span class="icon glyphicon glyphicon-search"></span>
+                  </div>
+              </div>
+          </div>
+          <header class="clearfix md-whiteframe-z1">
+
+            <div class="top-nav">
+              <ul class="nav-left list-unstyled">
+                <li>
+                    <!-- needs to be put after logo to make it working-->
+                    <div class="menu-button" toggle-off-canvas>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </div>
+
+                </li>
+                <li>
+                    <a md-ink-ripple="#bbb" href="#" data-toggle-min-nav
+                       class="toggle-min"
+                            ><i class="fa fa-list color-white"></i></a>
+                </li>
+
+
+            </ul>            
+
+            <ul class="nav-button pull-right list-unstyled">
+
+                <li class="dropdown text-small nav-profile">
+                    <a md-ink-ripple="#bbb" href="javascript:;" class="dropdown-toggle text-muted" data-toggle="dropdown" aria-expanded="false">
+                        <span class="nav-profile__welcome-text"><i class="fa fa-angle-down"></i>&nbsp; Welcome John Doe &nbsp; </span><img src="{% static 'img/user.png' %}" alt="" class="img30_30">
+                    </a>
+
+                    <div class="dropdown-menu pull-right panel panel-default">
+
+                        <ul class="list-group">
+
+                            <li class="list-group-item--header">
+                              Profile settings
+                            </li>
+
+                            <li class="list-group-item">
+                                <a href="#/pages/profile">
+
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#/tasks">
+
+                                    <span>Tasks</span>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                              <a href="#/contact">
+
+                                <span>Contact</span>
+                              </a>
+                            </li>
+
+                        </ul>
+                        
+                    </div>
+                </li>
+
+            </ul>
+
+          </div>
+
+        </header>
+      </section>
+    </div>
+    <section id="content"></section>  <!-- data-ng-view="" class="animate-fade-up" -->
+  </div>
+
+  <!-- <md-sidenav class="md-sidenav-right md-whiteframe-z2 md-theme" md-component-id="rightmessages">
+    <div data-ng-include=" 'Views/right-navbar.html' ">
+
+    </div>
+  </md-sidenav> -->
+
+</div>
+
+<div>  <!-- class="page-loading-overlay" -->
+  <div></div>  <!-- class="loader-2" -->
+</div>
+
+<div>  <!-- class="load_circle_wrapper" -->
+
+  <div>  <!-- class="loading_spinner" -->
+    <div id="wrap_spinner">
+      <!-- <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular> -->
+    </div>
+  </div>
+</div>
+
+<!-- Theme main app compiled with grunt (replace with below scripts if not using grunt) -->
+<script id="app_js" type="text/javascript" src="{% static 'js/app.js' %}"></script>
+
+<!-- Replace main.js with all of these if not using grunt to compile -->
+<!--<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="scripts/gmap.js"></script>
+<script src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="bower_components/angular-material/angular-material.min.js"></script>
+<script src="bower_components/underscore/underscore-min.js"></script>
+<script src="bower_components/raphael/raphael-min.js"></script>
+<script src="bower_components/morrisjs/morris.min.js"></script>
+<script src="bower_components/flot/jquery.flot.js"></script>
+<script src="bower_components/flot/jquery.flot.canvas.js"></script>
+<script src="bower_components/flot/jquery.flot.categories.js"></script>
+<script src="bower_components/flot/jquery.flot.crosshair.js"></script>
+<script src="bower_components/flot/jquery.flot.image.js"></script>
+<script src="bower_components/flot/jquery.flot.navigate.js"></script>
+<script src="bower_components/flot/jquery.flot.time.js"></script>
+<script src="bower_components/flot/jquery.flot.pie.js"></script>
+<script src="bower_components/flot/jquery.flot.resize.js"></script>
+<script src="bower_components/flot/jquery.flot.selection.js"></script>
+<script src="bower_components/flot/jquery.flot.stack.js"></script>
+<script src="bower_components/flot.curvedlines/curvedLines.js"></script>
+<script src="bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+<script src="bower_components/jquery.sparkline.build/dist/jquery.sparkline.min.js"></script>
+<script src="bower_components/easypie/dist/angular.easypiechart.min.js"></script>
+<script src="bower_components/angular-wizard/dist/angular-wizard.js"></script>
+<script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+<script src="bower_components/jqvmap/jqvmap/jquery.vmap.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="scripts/other_charts.js"></script>
+<script src="scripts/extras.js"></script>
+<script src="scripts/audio.min.js"></script>
+
+<script src="app/app.js"></script>
+<script src="app/config.js"></script>
+<script src="app/controllers.js"></script>
+<script src="app/directives.js"></script>
+<script src="app/services.js"></script>-->
+
+</body>
+</html>

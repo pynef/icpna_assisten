@@ -1,0 +1,43 @@
+<section class="panel" ng-init="Initializing(inst, sede, token)">
+	<md-toolbar class="md-default-theme">
+		<div class="md-toolbar-tools">		            			
+			<h3>
+		    	<span>ASISTENCIA</span>
+		    </h3>
+		</div>
+	</md-toolbar>
+	<div class="panel-body">
+		<table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th ng-repeat="i in getNumber(number) track by $index">{{$index + 1}}<md-tooltip>{{dias[$index].fecha | date: 'dd/MM/yyyy'}}</md-tooltip></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="alumno in alumnos">
+					<td>{{alumno.apellido_paterno + ' ' + alumno.apellido_materno + ', ' + alumno.nombres}}</td>
+					<td ng-repeat="i in getNumber(number) track by $index">
+						<span 
+							ng-class="color_sin_registro[$parent.$index][$index]" 
+							ng-click="CambiaColor($parent.$index, $index, 1, 1, alumno.matricula, dias[$index].id, user_name, token)">
+							&nbsp;
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>							
+	<div class="row" ng-show="false">
+	    <div class="pull-right">
+	       <md-button class="md-fab md-primary md-button md-default-theme" ng-transclude="">	   		
+				<div style="" class="md-ripple-container">Editar</div>
+		   </md-button>
+		   <md-button class="md-fab md-success md-button md-default-theme" ng-transclude="">   		
+				<div style="" class="md-ripple-container">Guardar</div>
+		   </md-button>
+		   <md-button class="md-fab md-danger md-button md-default-theme" ng-transclude="">   		
+				<div style="" class="md-ripple-container">Cancelar</div>
+		   </md-button>
+		</div>
+	</div>
+</section>

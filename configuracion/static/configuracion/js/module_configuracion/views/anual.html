@@ -1,0 +1,262 @@
+<div class="row" ng-init="Initializing(inst, sede, token)">
+	<div class="col-md-5">
+		<section class="panel">
+		    <md-toolbar class="md-default-theme">
+		        <div class="md-toolbar-tools">
+		            <h3>
+						<span>
+							CONFIGURACION ANUAL
+						</span>
+		            </h3>
+		        </div>
+		    </md-toolbar>
+
+		    <div class="panel-body">
+		    	<div layout="row" layout-align="start center">
+		            <label for="" class="col-md-3">AÑO</label>
+		          	<div class="col-md-9">
+		          	    <input type="number" class="form-control" ng-model="anio_config"/>
+		          	</div>
+		        </div>
+		        <div layout="row" layout-align="start center">
+		            <label for="" class="col-md-3">PROGRAMA</label>
+		          	<div class="col-md-9">
+		          	    <md-select name="" id="" aria-label="program_select" ng-model="idPrograma" ng-change="cambioPrograma(inst, sede, idPrograma, token)">
+		          	        <md-option value="0">--SELECCIONE</md-option>
+		          			<md-option  ng-repeat="programa in programas" value="{{programa.id}}">
+		          				{{programa.nombre | uppercase}}
+		          			</md-option>
+		          		 </md-select>
+		          	</div>
+		        </div>		        
+		        <div layout="row" layout-align="start center">
+		            <label for="" class="col-md-3">NIVEL</label>
+		          	<div class="col-md-9">
+		          	    <md-select name="" id="" aria-label="level_select" ng-model="idNivel" >
+		          		    <md-option value="0">--SELECCIONE</md-option>
+		          			<md-option ng-repeat="nivel in niveles" value="{{nivel.id}}">
+		          				{{nivel.nombre | uppercase}}
+		          			</md-option>
+		          		 </md-select>
+		          	</div>
+		        </div>	
+		        
+				<div class="col-lg-12">
+					<a ng-click="cambioNivel(inst, sede, idNivel, anio_config, token)" class="btn btn-primary btn-block">
+						Buscar
+					</a>
+				</div>
+				
+		        <hr>	        
+				<!-- SECCION de BUSQUEDA -->
+				<div layout="row" ng-show="estadoBusqueda" >
+					<p> Estado: 
+						<span ng-show="!abierto"> CERRADO </span>
+						<span ng-show="abierto"> ABIERTO </span>
+					</p>
+				</div>
+
+
+		        <div ng-show="estadoBusqueda" layout="row" layout-align="start center">
+		            <label for="" class="col-md-3">CALIFICACION</label>
+		          	<div class="col-md-9">
+		          	    <md-radio-group ng-model="calif_config">
+							<div class="col-md-6">
+								<md-radio-button ng-disabled="!abierto" class="md-primary" value="ALFABÉTICA">ALFABÉTICA</md-radio-button>
+							</div>
+							<div class="col-md-6">
+								<md-radio-button ng-disabled="!abierto" class="md-primary" value="NUMÉRICA">NUMÉRICA</md-radio-button>
+							</div>      							
+						</md-radio-group>
+		          	</div>
+		        </div>
+
+		        <div ng-show="estadoBusqueda" layout="row" layout-align="start center">
+		            <label for="" class="col-md-3">NOTA MÁX.</label>
+		          	<div class="col-md-9">
+		          	    <input ng-disabled="!abierto" class="form-control" type="text" ng-model="nota_config"/>
+		          	</div>
+		        </div>
+
+		        <div ng-show="estadoBusqueda" class="row">
+		        	<div class="col-md-12">
+		          	    <md-button class="btn-width-xs md-raised md-info" 
+		          	    ng-click="EstablecerConfiguracion(inst, sede, idPrograma,idNivel, anio_config, nota_config, calif_config, user_name, token)" 
+		          	    ng-disabled="!abierto" >
+				              <md-icon md-svg-src="static/img/icons/ic_lock_24px.svg"></md-icon> 
+				              Establecer Conf.
+				        </md-button>
+				        <md-button class="btn-width-xs md-raised md-danger" ng-disabled="!abierto" >
+				              <md-icon md-svg-src="static/img/icons/ic_close_24px.svg"></md-icon> 
+				        	Cerrar Conf.
+				        </md-button>
+		          	</div>
+		        </div>		        
+
+		        <hr>
+
+				<!-- FIN  -->
+
+	    	</div>
+
+	    </section>
+	</div>
+
+	<div class="col-md-7">
+		<section class="panel">
+			<md-toolbar class="md-default-theme">	            		
+		        <div class="md-toolbar-tools">
+		            <h3>
+						<span>
+							<i class="fa fa-list"></i> 
+							COMPONENTES							
+						</span>	            		    
+		            </h3>
+		        </div>
+		    </md-toolbar>
+
+		    <div class="panel-body">
+		        <div class="row" ng-hide="!estadoBusqueda || nuevoComponenteStatus">
+		            <div class="col-md-12">
+		          	    <md-button class="btn-width-xs md-raised md-success" ng-click="nuevoComponente()"  ng-disabled="!abierto || !crearComponente" >
+		              		<md-icon md-svg-src="static/img/icons/ic_add_circle_24px.svg"></md-icon> 
+		              		NUEVO COMPONENTE
+				        </md-button>
+		          	</div>
+		        </div>
+
+				<div layout="row" layout-align="start center" ng-show="nuevoComponenteStatus">
+					<label class="col-md-3" for="">NOMBRE</label>
+					<div class="col-md-9">
+						<input type="text" class="form-control" ng-model="componente_name"/>
+					</div>
+				</div>
+
+				<div layout="row" layout-align="start center" ng-show="nuevoComponenteStatus">
+					<label class="col-md-3" for="">SÍMBOLO</label>
+					<div class="col-md-9">
+						<md-select name="" id="" aria-label="symbol_select" ng-model="componente_symbol">
+		          			<md-option value="0">--SELECCIONE</md-option>
+		          			<md-option 
+		          			ng-repeat="letra in ['A','B','C','D','E','F','G','H','I','J',
+		          			'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']" value="{{letra}}">
+		          			    {{letra}}
+		          			</md-option>
+		          		</md-select>
+					</div>
+				</div>
+
+				<div class="text-center" ng-show="nuevoComponenteStatus">
+					<md-button class="btn-width-medium md-raised md-success" ng-click="guardarComponente(id, inst, sede, idNivel, config, componente_name, componente_symbol, anio_config, token, accion)">
+						<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+						GUARDAR
+					</md-button>
+					<md-button class="btn-width-medium md-raised md-info" ng-click="cancelarComponente()">
+						<md-icon md-svg-src="static/img/icons/ic_close_24px.svg"></md-icon> 
+						CANCELAR
+					</md-button>
+				</div>
+		    </div>
+
+    		<div class="panel-body">
+		    	<ul class="list-unstyled list-info">
+		    	    <li ng-repeat="componente in componentes">
+		    	        
+		    	        <div layout="row" layout-align="start center">
+		    	        	{{componente.nombre + ' | ' + componente.simbolo | uppercase}}
+			    	        <div ng-controller="HomeFabCtrl">
+	                      		<div class="lock-size homeSpeedDial">
+					    	        <md-fab-speed-dial md-open="demo.isOpen" md-direction="{{demo.selectedDirection}}" ng-class="demo.selectedMode">
+			                          	<md-fab-trigger>
+			                            	<md-button aria-label="menu" class="md-fab md-mini md-warning">
+			                              		<md-icon md-svg-src="/static/img/icons/ic_menu_24px.svg"></md-icon>
+			                            	</md-button>
+			                          	</md-fab-trigger>
+			                          	<md-fab-actions>
+			                            	<md-button aria-label="add_item" class="md-fab md-raised md-mini md-success" ng-click="nuevoItem($index)">
+			                              		<md-icon md-svg-src="/static/img/icons/ic_add_24px.svg"></md-icon>
+			                            	</md-button>
+			                            	<md-button aria-label="edit_component" class="md-fab md-raised md-mini md-info" ng-click="editaComponente(componente)">
+			                              		<md-icon md-svg-src="/static/img/icons/ic_edit_24px.svg"></md-icon>
+			                            	</md-button>
+			                            	<md-button aria-label="remove_component" class="md-fab md-raised md-mini md-danger" ng-click="eliminaComponente(componente, token)">
+			                              		<md-icon md-svg-src="/static/img/icons/ic_delete_24px.svg"></md-icon>
+			                            	</md-button>
+			                          	</md-fab-actions>
+			                        </md-fab-speed-dial>
+			                    </div>
+			                </div>
+		    	        </div>
+
+					    <div class="">      						
+							<div>
+								<ul class="list_items"> 
+									<li class="item" ng-repeat="i in componente.items_c">
+										{{ i.rango_max }} {{ i.nombre | uppercase }}
+										<a class="btn btn-primary btn-xs">
+											X
+										</a>
+									</li>
+								</ul>
+							</div>
+
+      						<div layout="row" layout-align="start center" ng-show="nuevoItemStatus[$index]">
+								<label class="col-md-3" for="">NOMBRE</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" ng-model="item_name" />
+								</div>
+							</div>
+							<div layout="row" layout-align="start center" ng-show="nuevoItemStatus[$index]">
+								<label class="col-md-3" for="">DESCRIPCIÓN</label>
+								<div class="col-md-9">
+									<textarea class="form-control" ng-model="item_description" ></textarea>
+								</div>
+							</div>
+							<br>
+							<div layout="row" layout-align="start center" ng-show="nuevoItemStatus[$index]">
+								<label class="col-md-3" for="">RANGO</label>
+								<div class="col-md-9">
+									<div class="col-md-4">
+										<input disabled ng-if="calif_config == 'ALFABÉTICA'" class="form-control text-center" type="text" name="min" value="A">
+										<input disabled ng-if="calif_config == 'NUMÉRICA'" class="form-control text-center" type="text" name="min" value="0">
+									</div>
+									<div class="col-md-1 text-center">
+										-
+									</div>
+									<div class="col-md-4">
+										<input class="form-control text-center" type="text" name="max" ng-model="item_range_max">
+									</div>
+								</div>
+							</div>
+							<br>
+							<div class="text-center" ng-show="nuevoItemStatus[$index]">
+								
+								<md-button class="btn-width-medium md-raised md-success" 
+								ng-if="calif_config == 'ALFABÉTICA'" 
+								ng-click="guardarItem($index, inst, sede, componente.id, item_name, item_description, '0', item_range_max, user_name, token)">
+									<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+									GUARDAR ITEM
+								</md-button>
+
+								<md-button class="btn-width-medium md-raised md-success" 
+								ng-if="calif_config == 'NUMÉRICA'" 
+								ng-click="guardarItem($index, inst, sede, componente.id, item_name, item_description, '0', item_range_max, user_name, token)">
+									<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+									GUARDAR ITEM
+								</md-button>
+
+								<md-button class="btn-width-medium md-raised md-info" ng-click="cancelarItem($index)">
+									<md-icon md-svg-src="static/img/icons/ic_close_24px.svg"></md-icon> 
+									CANCELAR
+								</md-button>
+								
+							</div>
+  						</div>
+
+		    	    </li>
+		    	</ul>
+    		</div>
+
+    	</section>
+    </div>
+</div>

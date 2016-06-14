@@ -1,0 +1,99 @@
+{% extends "baseApp.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Dashboard
+{% endblock title %}
+
+{% block bodyTag %}
+	ng-app="dashboard"
+	ng-controller="DashboardCtrl"	
+{% endblock bodyTag %}
+
+{% block contentListMenu %}
+	<li>
+	    <a md-ink-ripple="#bbb">
+	    	<md-icon md-svg-src="{% static 'img/icons/ic_person_outline_24px.svg' %}"></md-icon>
+	    	<span>Registro</span>
+	    </a>	    
+	</li>
+	<li ng-class="nav_notas">
+	    <a md-ink-ripple="#bbb" href="{% url 'notas' %}">
+	    	<md-icon md-svg-src="{% static 'img/icons/ic_local_library_24px.svg' %}"></md-icon>
+	        <span>Notas</span>
+	    </a>
+	</li>
+	<li ng-class="nav_asistencia">
+	    <a md-ink-ripple="#bbb" href="{% url 'asistencia' %}">
+	      <md-icon md-svg-src="{% static 'img/icons/ic_people_outline_24px.svg' %}"></md-icon>
+	        <span>Asistencia</span>
+	    </a>
+	</li>
+	<li>
+	    <a md-ink-ripple="#bbb">
+	    	<md-icon md-svg-src="{% static 'img/icons/ic_perm_phone_msg_24px.svg' %}"></md-icon>
+	        <span>Justificación</span>
+	    </a>
+	</li>
+	<li>
+	    <a md-ink-ripple="#bbb">
+	      	<md-icon md-svg-src="{% static 'img/icons/ic_check_24px.svg' %}"></md-icon>
+	        <span>Avance de Curso</span>
+	    </a>
+	</li>
+{% endblock contentListMenu %}
+
+{% block contentHeader %}	
+	{% include 'main/dashboard_header.html'%}	
+{% endblock contentHeader %}
+
+{% block contentBody %}	
+	<div class="wrapper">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-3">
+					<section class="panel">
+						<div class="panel-body">
+							<label for="">Huancayo, {% verbatim %}{{dia}} de {{mes}} del {{anio}}{% endverbatim %}</label>
+						</div>
+					</section>
+				</div>
+				{% block HeadSecondSection %}{% endblock HeadSecondSection %}
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<section class="panel">
+						<div class="row">
+							<div class="col-md-12">
+								<md-toolbar class="md-default-theme">
+				            		<div class="md-toolbar-tools">
+				            		    <div class="col-md-8">
+				            		    	<h3>
+					            		    	<span>Dashboard</span>
+					            		    </h3>
+				            		    </div>
+				            		</div>
+				            	</md-toolbar>
+				            	<p style="margin:10px ;">
+				            		BIENVENIDO.				            		
+				            	</p>
+				            </div>
+				        </div>
+				    </section>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock contentBody %}
+
+{% block jsEnd %}
+	{% load staticfiles %}
+	<script src="{% static 'main/js/module_dashboard/app.js' %}"></script>
+
+	<script src="{% static 'main/js/module_dashboard/config.js' %}"></script>
+	
+	<script src="{% static 'main/js/module_dashboard/controllers.js' %}"></script>
+
+	<script src="{% static 'main/js/module_dashboard/directives.js' %}"></script>
+
+{% endblock jsEnd %}

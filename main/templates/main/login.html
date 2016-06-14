@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Dashboard
+{% endblock title %}
+
+{% block bodyTag %}
+    ng-app="login"
+{% endblock bodyTag %}
+
+{% block content %}
+    <div class="page-signin">
+        
+        {% if user.is_authenticated %}
+            <p> Estas Logeado, 
+                <a href="{% url 'logout' %}"> SALIR </a>
+            </p>
+        {% endif %}
+
+        <div class="signin-header">
+            <div class="container text-center">
+                <section class="logo">
+                    <a href="#">
+                      <img src="{% static 'img/icpna_logo.png' %}"  >
+                    </a>
+                </section>
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="container">
+                <div class="form-container">
+                 
+                    <form class="form-horizontal" method="POST" action="." >
+                        {% csrf_token %}
+                        <fieldset>
+
+                            <div class="form-group">
+                              <p class="text-danger">{{ form.username.errors.as_text }}</p>  
+                              <md-input-container md-no-float>
+                                <md-icon md-svg-src="{% static 'img/icons/ic_person_24px.svg' %}"></md-icon>                                
+                                {{ form.username }} 
+                              </md-input-container>
+                            </div>
+                            
+
+                            <div class="form-group">
+                              <p class="text-danger">{{ form.password.errors.as_text }}</p>       
+                              <md-input-container class="md-primary" md-no-float>
+                                <md-icon md-svg-src="{% static 'img/icons/ic_lock_24px.svg' %}"></md-icon>                                
+                                {{ form.password }}
+                              </md-input-container>
+                            </div>                    
+
+                            <div class="form-group">
+
+                              <md-button class="btn-width-large btn-block btn-lg md-primary md-raised">
+                                Iniciar Sesión
+                              </md-button> 
+
+                            </div>
+
+                        </fieldset>
+                    </form>
+
+                    <section>
+                        <p class="text-center text-muted text-small">
+                            * Por razones de seguridad, no olvide cerrar la sesión, incluso antes de cerrar el navegador.
+                        </p>
+                    </section>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
+
+{% block jsEnd %}
+    {% load staticfiles %}
+    <script src="{% static 'main/js/module_login/app.js' %}"></script>
+
+    <script src="{% static 'main/js/module_login/config.js' %}"></script>
+    
+    <script src="{% static 'main/js/module_login/controllers.js' %}"></script>
+
+    <script src="{% static 'main/js/module_login/directives.js' %}"></script>
+
+{% endblock jsEnd %}

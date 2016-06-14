@@ -1,0 +1,24 @@
+{% extends 'main/dashboard.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+	Notas
+{% endblock title %}
+
+{% block bodyTag %}
+	ng-app="notas"
+	ng-controller="indexCtrl"
+	ng-init="inst={{usuario.USER_ID_INSTITUCION}};sede={{usuario.USER_ID_SEDE}};user_id={{usuario.USER_ID_ERPICPNA}};user_name='{{usuario.name}}';token='{{key_abi}}'"
+{% endblock bodyTag %}
+{% block contentBody %}	
+	<div class="wrapper" ui-view="content"></div>
+{% endblock contentBody %}
+{% block jsEnd %}
+	<script src="{% static 'notas/js/module_notas/app.js' %}"></script>
+	<script src="{% static 'notas/js/module_notas/config.js' %}"></script>
+	<script src="{% static 'notas/js/module_notas/routes.js' %}"></script>
+	<script src="{% static 'notas/js/module_notas/controllers.js' %}"></script>
+	<script src="{% static 'notas/js/module_notas/directives.js' %}"></script>
+	<script src="{% static 'notas/js/module_notas/services.js' %}"></script>
+{% endblock jsEnd %}

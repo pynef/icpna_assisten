@@ -1,0 +1,30 @@
+{% extends 'main/dashboard.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+    Asistencia
+{% endblock title %}
+
+{% block bodyTag %}
+    ng-app="asistencia"
+    ng-controller="indexCtrl"
+    ng-init="inst={{usuario.USER_ID_INSTITUCION}};sede={{usuario.USER_ID_SEDE}};user_id={{usuario.USER_ID_ERPICPNA}};user_name='{{usuario.name}}';token='{{key_abi}}'"
+{% endblock bodyTag %}
+
+{% block cssBegin %}
+    <link rel="stylesheet" href="{% static 'asistencia/css/colors.css' %}">
+{% endblock cssBegin %}
+
+{% block contentBody %}	
+    <div class="wrapper" ui-view="content"></dif>
+{% endblock contentBody %}
+
+{% block jsEnd %}
+    <script src="{% static 'asistencia/js/module_asistencia/app.js' %}"></script>
+    <script src="{% static 'asistencia/js/module_asistencia/config.js' %}"></script>
+    <script src="{% static 'asistencia/js/module_asistencia/controllers.js' %}"></script>
+    <script src="{% static 'asistencia/js/module_asistencia/directives.js' %}"></script>
+    <script src="{% static 'asistencia/js/module_asistencia/routes.js' %}"></script>
+    <script src="{% static 'asistencia/js/module_asistencia/services.js' %}"></script>
+{% endblock jsEnd %}

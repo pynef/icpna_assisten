@@ -1,0 +1,34 @@
+{% extends "main/dashboard.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+	Configuración
+{% endblock title %}
+
+{% block bodyTag %}
+	ng-app="nconfApp"
+	ng-controller="HomeCtrl"
+	ng-init="inst={{usuario.USER_ID_INSTITUCION}};sede={{usuario.USER_ID_SEDE}};user_name='{{usuario.name}}';token='{{key_abi}}'"
+	data-institucion-id="{{ usuario.USER_ID_INSTITUCION }}"
+	data-sede-id="{{ usuario.USER_ID_SEDE }}"
+	data-token-ui="{{key_abi}}"
+{% endblock bodyTag %}
+
+{% block contentBody %}
+	<div class="wrapper">
+		<div class="panel-body">
+			<div class="row"  ui-view="content" >
+			</div>
+		</div>
+	</div>
+{% endblock contentBody %}
+
+{% block jsEnd %}
+	<script src="{% static 'configuracion/js/module_configuracion/app.js' %}"></script>
+	<script src="{% static 'configuracion/js/module_configuracion/route.js' %}"></script>
+	<script src="{% static 'configuracion/js/module_configuracion/config.js' %}"></script>
+	<script src="{% static 'configuracion/js/module_configuracion/controllers.js' %}"></script>
+	<script src="{% static 'configuracion/js/module_configuracion/directives.js' %}"></script>
+	<script src="{% static 'configuracion/js/module_configuracion/services.js' %}"></script>
+{% endblock jsEnd %}

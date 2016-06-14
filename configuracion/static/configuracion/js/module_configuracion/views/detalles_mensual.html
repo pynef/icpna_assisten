@@ -1,0 +1,106 @@
+<section class="panel">
+	
+	<md-toolbar class="md-default-theme">	            		
+        <div class="md-toolbar-tools">
+            <h3>
+				<span>
+					<i class="fa fa-list"></i> 
+					COMPONENTES							
+				</span>	            		    
+            </h3>
+        </div>
+    </md-toolbar>
+
+	<div class="panel-body">
+    	<ul class="list-unstyled list-info">
+    	    <li ng-repeat="componente in componentes">
+    	        
+    	        <div layout="row" layout-align="start center">
+    	        	{{componente.nombre + ' | ' + componente.simbolo | uppercase}}
+	    	        <div ng-controller="HomeFabCtrl">
+                  		<div class="lock-size homeSpeedDial">
+			    	        <md-fab-speed-dial md-open="demo.isOpen" md-direction="{{demo.selectedDirection}}" ng-class="demo.selectedMode">
+	                          	<md-fab-trigger>
+	                            	<md-button aria-label="menu" class="md-fab md-mini md-warning">
+	                              		<md-icon md-svg-src="/static/img/icons/ic_menu_24px.svg"></md-icon>
+	                            	</md-button>
+	                          	</md-fab-trigger>
+	                          	<md-fab-actions>
+	                            	<md-button aria-label="edit_component" class="md-fab md-raised md-mini md-info">
+	                              		<md-icon md-svg-src="/static/img/icons/ic_edit_24px.svg"></md-icon>
+	                            	</md-button>
+	                            	<md-button aria-label="remove_component" class="md-fab md-raised md-mini md-danger">
+	                              		<md-icon md-svg-src="/static/img/icons/ic_delete_24px.svg"></md-icon>
+	                            	</md-button>
+	                          	</md-fab-actions>
+	                        </md-fab-speed-dial>
+	                    </div>
+	                </div>
+    	        </div>
+
+			    <div class="row">
+			   		<md-button class="btn-width-medium md-raised md-success" ng-click="nuevoItem($index)" ng-hide="nuevoItemStatus[$index]">
+						<md-icon md-svg-src="/static/img/icons/ic_add_24px.svg"></md-icon> AGREGAR ITEM
+					</md-button>
+					
+					<div>
+						<ul class="list_items"> 
+							<li class="item" ng-repeat="i in componente.items_c">
+								{{ i.rango_max }} {{ i.nombre | uppercase }}
+								<a class="btn btn-primary btn-xs">
+									X
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<div layout="row" layout-align="start center" ng-show="nuevoItemStatus[$index]">
+					<label class="col-md-3" for="">NOMBRE</label>
+					<div class="col-md-9">
+						<input type="text" class="form-control" ng-model="item_name" />
+					</div>
+				</div>
+
+				<div layout="row" layout-align="start center" ng-show="nuevoItemStatus[$index]">
+					<label class="col-md-3" for="">DESCRIPCIÓN</label>
+					<div class="col-md-9">
+						<textarea class="form-control" ng-model="item_description" ></textarea>
+					</div>
+				</div>
+					<br>
+				<div layout="row" layout-align="start center" ng-show="nuevoItemStatus[$index]">
+					<label class="col-md-3" for="">RANGO</label>
+					<div class="col-md-9">
+						<div class="col-md-4">
+							<input disabled ng-if="calif_config == 'ALFABÉTICA'" class="form-control text-center" type="text" name="min" value="A">
+							<input disabled ng-if="calif_config == 'NUMÉRICA'" class="form-control text-center" type="text" name="min" value="0">
+						</div>
+						<div class="col-md-1 text-center">
+							-
+						</div>
+						<div class="col-md-4">
+							<input class="form-control text-center" type="text" name="max" ng-model="item_range_max">
+						</div>
+					</div>
+				</div>
+					<br>
+				<div class="text-center" ng-show="nuevoItemStatus[$index]">
+					<md-button class="btn-width-medium md-raised md-success" ng-if="calif_config == 'ALFABÉTICA'" ng-click="guardarItem($index, inst, sede, componente.id, item_name, item_description, 'A', item_range_max, user_name, token)">
+						<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+						GUARDAR ITEM
+					</md-button>
+					<md-button class="btn-width-medium md-raised md-success" ng-if="calif_config == 'NUMÉRICA'" ng-click="guardarItem($index, inst, sede, componente.id, item_name, item_description, '0', item_range_max, user_name, token)">
+						<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+						GUARDAR ITEM
+					</md-button>
+					<md-button class="btn-width-medium md-raised md-info" ng-click="cancelarItem($index)">
+						<md-icon md-svg-src="static/img/icons/ic_close_24px.svg"></md-icon> 
+						CANCELAR
+					</md-button>
+				</div>
+			</div>		    	   
+    	</li>
+   	</ul>
+</div>
+
+</section>

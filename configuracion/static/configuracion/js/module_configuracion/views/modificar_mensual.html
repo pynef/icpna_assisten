@@ -1,0 +1,192 @@
+<section class="panel">
+	
+	<md-toolbar class="md-default-theme">	            		
+        <div class="md-toolbar-tools">
+            <h3>
+				<span>
+					<i class="fa fa-list"></i> 
+					MODIFICAR							
+				</span>	            		    
+            </h3>
+        </div>
+    </md-toolbar>
+
+	<div class="panel-body">
+ 		<p> {{ mensaje }} </p>
+		<p> Calificacion: {{ configuracion.calificacion }} | Nota Max.: {{ configuracion.nota_max }}</p>
+		<hr>
+
+		<div class="row">
+			<div class="col-md-3 " ng-repeat="curso in cursos" >
+				<label>
+					<input ng-change="cambia({{curso.id}},{{curso.estado}})" ng-model="cursoTomar" type="checkbox" value="{{ curso.id }}" > {{ curso.nombre }} 
+				</label>
+			</div>
+		</div>
+		<hr>
+ 		
+ 		<p>Componentes</p>
+ 		<div ng-show="!vistaCrearComponente"> 
+ 			<md-button class="btn-width-medium md-raised md-success" 
+ 				ng-click="irCrear();">
+ 				<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+ 				AGREGAR COMPONENTE
+ 			</md-button>
+ 		</div>
+		
+		<div ng-show="vistaCrearComponente"> 
+			<div>
+				<div layout="row" layout-align="start center" >
+					<label class="col-md-3" for="">NOMBRE</label>
+					<div class="col-md-9">
+						<input ng-model="componente.nombre" type="text" class="form-control" />
+					</div>
+				</div>
+
+				<div layout="row" layout-align="start center" >
+					<label class="col-md-3" for="">SÍMBOLO</label>
+					<div class="col-md-9">
+						<md-select name="" id="" aria-label="symbol_select" ng-model="componente.simbolo">
+		          			<md-option value="0">--SELECCIONE</md-option>
+		          			<md-option ng-repeat="letra in abc" value="{{letra}}">
+		          			    {{letra}}
+		          			</md-option>
+		          		</md-select>
+					</div>
+				</div>
+			</div>
+			<div class="text-center" >
+
+				<md-button ng-click="agregaComponente(componente)" ng-show="btnGuardar" class="btn-width-medium md-raised md-success">
+					<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+					GUARDAR
+				</md-button>
+
+				<md-button ng-click="editaComponente(componente)" ng-show="btnEditar" class="btn-width-medium md-raised md-success">
+					<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+					EDITAR
+				</md-button>
+
+				<md-button class="btn-width-medium md-raised md-info" ng-click="cerrarCrear()" >
+					<md-icon md-svg-src="static/img/icons/ic_close_24px.svg"></md-icon> 
+					CANCELAR
+				</md-button>
+			</div>
+		</div>
+
+		<div ng-show="vistaCrearItem">
+			
+			<div layout="row" layout-align="start center">
+				<label class="col-md-3" for="">NOMBRE</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" ng-model="item.nombre" />
+				</div>
+			</div>
+			<div layout="row" layout-align="start center">
+				<label class="col-md-3" for="">DESCRIPCIÓN</label>
+				<div class="col-md-9">
+					<textarea class="form-control" ng-model="item.descripcion" ></textarea>
+				</div>
+			</div>	
+			<div layout="row" layout-align="start center">
+				<label class="col-md-3" for="">RANGO</label>
+				<div class="col-md-9">
+					<div class="col-md-4">
+						<input disabled ng-if="calif_config == 'ALFABÉTICA'" class="form-control text-center" type="text" name="min" value="A">
+						<input disabled ng-if="calif_config == 'NUMÉRICA'" class="form-control text-center" type="text" name="min" value="0">
+					</div>
+					<div class="col-md-1 text-center">
+						-
+					</div>
+					<div class="col-md-4">
+						<input class="form-control text-center" ng-model="item.rango_max" type="text" name="max">
+					</div>
+				</div>
+			</div>
+
+			<div class="text-center" >
+				
+				<md-button class="btn-width-medium md-raised md-success" 
+					ng-show="btnAgregaItem" 
+					ng-click="agregaItem(item)">
+					<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+					GUARDAR I
+				</md-button>
+
+				<md-button class="btn-width-medium md-raised md-success" 
+					ng-show="btnEditaItem" 
+					ng-click="editaItem(item)">
+					<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+					EDITAR I
+				</md-button>
+				
+
+				<md-button class="btn-width-medium md-raised md-info" ng-click="cerrarItem()" >
+					<md-icon md-svg-src="static/img/icons/ic_close_24px.svg"></md-icon> 
+					CANCELAR
+				</md-button>
+			</div>
+		</div>
+ 
+ 		<ul class="list-unstyled list-info" ng-show="!vistaCrearComponente && !vistaCrearItem" >
+    	    <li ng-repeat="componente in componentes">
+    	        
+    	        <div layout="row" layout-align="start center">
+    	        	{{componente.nombre + ' | ' + componente.simbolo}}
+	    	        <div ng-controller="HomeFabCtrl">
+                  		<div class="lock-size homeSpeedDial">
+			    	        <md-fab-speed-dial md-open="demo.isOpen" md-direction="{{demo.selectedDirection}}" ng-class="demo.selectedMode">
+	                          	<md-fab-trigger>
+	                            	<md-button aria-label="menu" class="md-fab md-mini md-warning">
+	                              		<md-icon md-svg-src="/static/img/icons/ic_menu_24px.svg"></md-icon>
+	                            	</md-button>
+	                          	</md-fab-trigger>
+	                          	<md-fab-actions>
+
+	                            	<md-button ng-click="irCrearItem($index)" aria-label="add_item" class="md-fab md-raised md-mini md-success">
+	                              		<md-icon md-svg-src="/static/img/icons/ic_add_24px.svg"></md-icon>
+	                            	</md-button>
+
+	                            	<md-button ng-click="irEditarComponente(componente)" aria-label="edit_component" class="md-fab md-raised md-mini md-info">
+	                              		<md-icon md-svg-src="/static/img/icons/ic_edit_24px.svg"></md-icon>
+	                            	</md-button>
+
+	                            	<md-button ng-click="eliminaComponente(componente)" aria-label="remove_component" class="md-fab md-raised md-mini md-danger">
+	                              		<md-icon md-svg-src="/static/img/icons/ic_delete_24px.svg"></md-icon>
+	                            	</md-button>
+
+	                          	</md-fab-actions>
+	                        </md-fab-speed-dial>
+	                    </div>
+	                </div>
+    	        </div>
+
+			    <div class="">      						
+					<div>
+						<ul class="list_items"> 
+							<li class="item" ng-repeat="i in componente.items_c">
+								{{ i.rango_max }} {{ i.nombre | uppercase }}
+								<a class="btn btn-primary btn-xs">
+									X
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</li>
+ 		</ul>
+
+ 		<div ng-show="!vistaCrearComponente && !vistaCrearItem" > 
+			<md-button class="btn-width-medium md-raised md-success" ng-click="terminarProceso()" >
+				<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+				Terminar
+			</md-button>
+			<md-button class="btn-width-medium md-raised md-danger" ng-click="cancelarProceso()" >
+				<md-icon md-svg-src="static/img/icons/ic_save_24px.svg"></md-icon> 
+				Cancelar
+			</md-button> 
+ 		</div>
+
+	</div>
+
+</section>

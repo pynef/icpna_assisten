@@ -1,0 +1,146 @@
+{% load apptags %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<title>
+		{% block title %}{% endblock title %}
+	</title>
+
+	{% load staticfiles %}
+
+	<!-- Theme's own CSS file -->
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/angular-material.min.css' %}">
+	<link id="app_main_css" rel="stylesheet" href="{% static 'css/theme_blue/css/main.css' %}">
+	<link rel="stylesheet" href="{% static 'css/alertify/alertify.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/alertify/default.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+	<script type="text/javascript">
+		window.assistant = {
+			'settings': {
+				'static': '{{ STATIC_URL }}'
+			}
+		};
+		window.ICPNA = {
+			'current' : {
+				'permissions': {{permisos|safe}}
+			}			
+		};
+	</script>
+	{% block cssBegin %}  {% endblock cssBegin %}
+
+	<!-- Include Jquery in the vendor folder -->
+  	<script src="{% static 'js/jquery.min.js' %}"></script>
+	{% block jsBegin %}  {% endblock jsBegin %}
+	
+	<!--[if lte IE 9]>
+	<script src="dist/js/html5shiv.min.js"></script>
+	<![endif]-->
+
+	<link href="{% static 'css/fonts-googleapis.css' %}" rel="stylesheet" type="text/css">
+	{% block head %}{% endblock head %}
+
+</head>
+<body {% block bodyTag %} {% endblock bodyTag %} >
+
+
+		
+	<div  class="page-wrapper nav-style--alternative">
+		<div class="no-print" >
+			<aside id="nav-container" >
+				<div id="nav-wrapper" class="md-whiteframe-z2">
+				    
+				    <ul id="nav"
+				        data-ng-controller="NavCtrl"
+				        data-slim-scroll
+				        data-collapse-nav
+				        data-highlight-active>
+				        
+				        <li class="navigation-profile-picture">
+				          	<a href="#/">
+				            	<img src="{{ usuario.USER_URL_IMG_LINK }}" alt="" class="img80_80 img-circle">
+				          	</a>
+				          	<span class="menu_tag_name" >
+				          		{{usuario.USER_LAST_NAME | upper}}, {{usuario.USER_FIRST_NAME | upper}}
+				          	</span>
+				          	<div class="row">
+				          		<div class="col-lg-6">
+					          		<a href="{% url 'config' %}" ry-helpers-auth ry-table="configuracion" ry-crud="c">
+					          			<md-icon class="color-white" md-svg-src="{% static 'img/icons/ic_settings_24px.svg' %}">
+					          			</md-icon>
+					          		</a>
+				          		</div>
+				          		<div class="col-lg-6">
+					          		<a href="">
+					          			<md-icon class="color-white" md-svg-src="{% static 'img/icons/ic_backspace_24px.svg' %}">
+					          			</md-icon>
+					          		</a>
+				          		</div>
+				          	</div>
+				        </li>
+						{% block contentListMenu %}
+						{% endblock contentListMenu %}
+					</ul>
+				</div>
+			</aside>	
+		</div>
+
+		<div  class="view-container">
+			<div class="no-print">
+				<section id="header" class="top-header">
+					{% block contentHeader %}
+					{% endblock contentHeader %}
+			  	</section>
+			</div> 
+
+			<section id="content" class="animate-fade-up">
+				{% block contentBody %}
+				{% endblock contentBody %}
+			</section>
+		</div>
+ 
+
+	</div>
+
+	<input name="__RequestVerificationToken" id="token_ui" data-token="{{key_abi}}" type="hidden" value="{{key_abi}}" />
+
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/jquery.slimscroll.min.js' %}"></script> 
+	<!-- 
+	<script type="text/javascript" src="scripts/gmap.js"></script> 
+	-->
+	<script type="text/javascript" src="{% static 'js/angular.min.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/angular-animate.min.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/angular-route.min.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/angular-aria.min.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/angular-material.min.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/angular-resource.min.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/ng-tags-input.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/angular-ui-router.min.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/underscore-min.js' %}"></script>
+
+	<!-- <script type="text/javascript" src="{% static 'js/init.js' %}"></script> -->
+
+	<script type="text/javascript" src="{% static 'js/helpers.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/alertify.min.js' %}"></script>
+
+	{% block jsEnd %}  {% endblock jsEnd %}
+	
+</body>
+</html>

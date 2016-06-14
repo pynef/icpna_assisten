@@ -1,0 +1,94 @@
+{% load staticfiles %}
+<!-- Logo -->
+<div class="logo">
+    <a class="logo-link" href="#/">
+      <!-- <md-icon md-svg-src="{% static 'img/icons/ic_whatshot_24px.svg' %}"></md-icon> -->
+      <img src="{% static 'img/icpna_logo.png' %}"  >
+        <!--<span>{{info.theme_name}}</span>-->
+    </a>
+    <!--
+    <div class="form-group logo-search">
+         <div>
+            <input type="text" class="form-control" placeholder="Search site">
+            <span class="icon glyphicon glyphicon-search"></span>
+        </div>
+    </div>
+    --> 
+</div>
+<header class="clearfix md-whiteframe-z1">
+
+<div class="top-nav">
+
+    <ul class="nav-left pull-left list-unstyled list-notifications">
+        <li class="list-notifications__item" ng-controller="NavCtrl">
+            <a md-ink-ripple="#8C8C8C" ng-click="toggleAlternativeMenu()" class="">
+              <md-icon class="color-primary" md-svg-src="{% static 'img/icons/ic_radio_button_on_24px.svg' %}"></md-icon>
+              <md-tooltip>
+                Alternar Menu
+              </md-tooltip>
+            </a>
+        </li>
+
+        {% block contenMenuExtra %}     
+        {% endblock contenMenuExtra %}
+        
+    </ul>
+
+ 
+<ul class="nav-button pull-right list-unstyled">
+
+    <li class="dropdown text-small nav-profile">
+        <a md-ink-ripple="#bbb" href="javascript:;" class="dropdown-toggle text-muted" data-toggle="dropdown" aria-expanded="false">
+            <span class="nav-profile__welcome-text"><i class="fa fa-angle-down"></i>
+                {{ user.username|upper }}
+            </span>
+            
+            <img src="{{ usuario.USER_URL_IMG_LINK }}" alt="" class="img30_30">
+        
+        </a>
+
+        <div class="dropdown-menu pull-right panel panel-default">
+
+            <ul class="list-group">
+                <!--
+                <li class="list-group-item--header">
+                  Profile settings
+                </li>
+                <li class="list-group-item">
+                    <a href="#/pages/profile">
+
+                        <span>Profile</span>
+                    </a>
+                </li>
+                -->
+                <li class="list-group-item">
+                  <a href="{% url 'logout' %}">
+                    <md-icon class="color-danger" md-svg-src="{% static 'img/icons/ic_exit_to_app_24px.svg' %}"></md-icon>
+                    <span>Salir</span>
+                  </a>
+                </li>
+            </ul>
+
+            <!-- 
+            <div class="panel-footer">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <a href="{% url 'logout' %}">
+                    <md-icon class="color-danger" md-svg-src="{% static 'img/icons/ic_exit_to_app_24px.svg' %}"></md-icon>
+                    <span>Salir</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            -->
+
+        </div>
+    </li>
+
+</ul>
+
+</div>
+
+</header>
+
+

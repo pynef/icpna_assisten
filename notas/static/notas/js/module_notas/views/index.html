@@ -1,0 +1,44 @@
+	<div class="panel-body" ng-init="CargandoCursos(inst, sede, user_id, token)">
+		<div class="row">
+			<div class="col-md-3">
+				<section class="panel">
+					<div class="panel-body">
+						<label for="">Huancayo, {{dia}} de {{mes}} del {{anio}}</label>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<section class="panel">
+					<div class="row">
+						<div class="col-md-12">
+							<md-toolbar class="md-default-theme">
+			            		<div class="md-toolbar-tools">
+			            		    <div class="col-md-8">
+			            		    	<h3>
+				            		    	<span>CURSO | HORARIO</span>
+				            		    </h3>
+			            		    </div>
+			            		    <div class="col-md-2">
+			            		    	<md-switch class="md-accent" ng-model="cursos_switch" aria-label="habilitar_cursos" md-no-ink></md-switch>
+			            		    </div>     		    
+			            		</div>
+	          				</md-toolbar>
+						</div>							
+					</div>
+						<ul class="list-group">
+						    <li class="list-group-item" ng-repeat="curso in cursos" >  
+								{{curso.curso_nombre}} | {{curso.curso_horario}}  
+								<md-button class="btn-width-xs md-raised md-primary pull-right" ng-disabled="! cursos_switch" ui-sref="index.detail({cursoId: curso.curso_id, ofertaId: curso.oferta_academica_id, calendarioId: curso.calendario_academico_id})">   
+								DETALLES
+								</md-button>
+
+								<div class="clearfix" ></div>
+						    </li>
+						</ul>
+				</section>
+			</div>
+		    <div class="col-md-9" ui-view="contentDetail"></div>
+		</div>
+	</div>

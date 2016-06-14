@@ -1,0 +1,112 @@
+<div class="row" ng-init="Initializing(inst, sede, token)">
+	<div class="col-md-5">
+		<section class="panel">
+		    <md-toolbar class="md-default-theme">	            		
+		        <div class="md-toolbar-tools">
+		            <h3>
+						<span> 
+							CONFIGURACION MENSUAL 
+						</span>	            		    
+		            </h3>
+		        </div>
+		    </md-toolbar>
+		    <div class="panel-body">
+		    	<div layout="row" layout-align="start center">
+		            <label for="" class="col-md-3">AÑO</label>
+		          	<div class="col-md-9">
+		          	    <input class="form-control" type="number" ng-model="anio_config">
+		          	</div>
+		        </div>
+		        <div layout="row" layout-align="start center">
+			        <label for="" class="col-lg-3">MES</label>
+					<div class="col-lg-9">
+					    <md-select name="" id="" aria-label="month_select" ng-model="mes_config" name="" id="" required>
+					        <md-option value="0">--SELECCIONE</md-option>
+					        <md-option ng-repeat="mes in meses" value="{{mes.id}}">{{mes.nombre | uppercase}}</md-option>        
+					    </md-select>
+					</div>
+			    </div>
+		        <div layout="row" layout-align="start center">
+		            <label for="" class="col-md-3">PROGRAMA</label>
+		          	<div class="col-md-9">
+		          	    <md-select name="" id="" aria-label="program_select" ng-model="idPrograma" ng-change="cambioPrograma(inst, sede, idPrograma, token)">
+		          	        <md-option value="0">--SELECCIONE</md-option>
+		          			<md-option  ng-repeat="programa  in programas" value="{{ programa.id }}">
+		          				{{ programa.nombre | uppercase }}
+		          			</md-option>
+		          		 </md-select>
+		          	</div>
+		        </div>	        
+		        <div layout="row" layout-align="start center">
+		            <label for="" class="col-md-3">NIVEL</label>
+		          	<div class="col-md-9">
+		          	    <md-select name="" id="" aria-label="level_select" ng-model="idNivel" >
+		          		    <md-option value="0">--SELECCIONE</md-option>
+		          			<md-option ng-repeat="nivel in niveles" value="{{ nivel.id }}">
+		          				{{ nivel.nombre | uppercase }}
+		          			</md-option>
+		          		</md-select>
+		          	</div>
+		        </div>	
+
+		        <div class="row">
+		        	<div class="col-lg-12">
+			        	<a ng-click="cambioNivel(inst, sede, idPrograma, idNivel, anio_config, mes_config, token)" class="btn btn-primary btn-block">
+		        		Buscar
+			        	</a>
+		        	</div>
+		        </div>	        
+
+		        <div class="row"> 
+		        	<div class="col-lg-12"> 
+						
+						<div ng-if="recData_mensaje" class="callout-elem callout-elem-success"> 
+				          <p> {{ recData_mensaje }} </p>
+				        </div>
+ 
+						
+						<ul class="list-unstyled list-info">
+		                    <li  ng-repeat="grupo in listaGrupos"  >
+		                  		<div layout="row" layout-align="start center">
+			                  		{{ grupo.nombre }}								
+	      			    	        <div ng-controller="HomeFabCtrl" > 
+
+	      		                  		<div class="lock-size homeSpeedDial">
+	      					    	        <md-fab-speed-dial md-open="demo.isOpen" md-direction="{{demo.selectedDirection}}" ng-class="demo.selectedMode">
+	      			                          	<md-fab-trigger>
+	      			                            	<md-button aria-label="menu" class="md-fab md-mini md-warning">
+	      			                              		<md-icon md-svg-src="/static/img/icons/ic_menu_24px.svg"></md-icon>
+	      			                            	</md-button>
+	      			                          	</md-fab-trigger>
+	      			                          	<md-fab-actions>
+	      			                            	<md-button aria-label="visibility" ui-sref="home.mensual.detalles({tipo:grupo.tipo, id:grupo.id_principal})"  class="md-fab md-raised md-mini md-info">
+	      			                              		<md-icon md-svg-src="/static/img/icons/ic_visibility_24px.svg"></md-icon>
+	      			                            	</md-button>
+	      			                            	<md-button aria-label="backup" ui-sref="home.mensual.trasladar({tipo:grupo.tipo, id:grupo.id_principal})" class="md-fab md-raised md-mini md-primary">
+	      			                              		<md-icon md-svg-src="/static/img/icons/ic_settings_backup_restore_24px.svg"></md-icon>
+	      			                            	</md-button>
+	      			                            	<md-button aria-label="edit" 
+	      			                            	ui-sref="home.mensual.modificar({tipo:grupo.tipo, id:grupo.id_principal, mes:mes_config })" 
+	      			                            	class="md-fab md-raised md-mini md-accent">
+	      			                              		<md-icon md-svg-src="/static/img/icons/ic_call_split_24px.svg"></md-icon>
+	      			                            	</md-button>
+	      			                          	</md-fab-actions>
+	      			                        </md-fab-speed-dial>
+	      			                    </div>
+	      			                </div>	
+      			                </div>
+ 		
+		                    </li> 
+		                </ul>
+
+		        	</div>
+		        </div>
+				<hr>						        
+		    </div>	   
+
+		</section>
+	</div>
+	<div class="col-md-7" ui-view="detallesContent" >
+
+    </div>
+</div>
